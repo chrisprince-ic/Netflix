@@ -15,13 +15,17 @@ const App = () => {
   useEffect(() => {
 
     onAuthStateChanged(auth, async(user) => {
-      if (user) {
+     try {
+       if (user) {
         console.log('User is signed in')
         navigate('/')
       } else {
         console.log('User is signed out')
         navigate('/Login')
       }
+     } catch (error) {
+       console.error('Auth state change error:', error)
+     }
     })
   },[])
 
@@ -34,6 +38,7 @@ const App = () => {
         <Route path='/player/:id' element ={<Player />} />
 
       </Routes>
+      
     </div>
   )
 }
